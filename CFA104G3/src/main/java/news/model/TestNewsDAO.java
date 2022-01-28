@@ -72,6 +72,6 @@ public class TestNewsDAO {
 	@Test
 	public void testSelectAll() {
 		List<NewsVO> vos = dao.selectAll();
-		assertTrue(vos.size() > 0);
+		assertTrue(vos.size() > 1);
 	}
 }
