@@ -46,7 +46,7 @@ public class TestFaqDAO {
 	public void testUpdate() {
 		FaqVO pojo = new FaqVO();
 
-		pojo.setId(1);
+		pojo.setId("1");
 		pojo.setQuestion("如何登入會員?");
 		pojo.setAnswer("點選畫面右上角頭像登入");
 

@@ -44,7 +44,7 @@ public class FaqDAO implements CoreDao<FaqVO, Integer> {
 			con = DriverManager.getConnection(SQLUtil.URL, SQLUtil.USER, SQLUtil.PASSWORD);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setInt(1, pojo.getId());
+			pstmt.setString(1, pojo.getId());
 			pstmt.setString(2, pojo.getQuestion());
 			pstmt.setString(3, pojo.getAnswer());
 
@@ -91,7 +91,7 @@ public class FaqDAO implements CoreDao<FaqVO, Integer> {
 			con = DriverManager.getConnection(SQLUtil.URL, SQLUtil.USER, SQLUtil.PASSWORD);
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setInt(1, pojo.getId());
+			pstmt.setString(1, pojo.getId());
 			pstmt.setString(2, pojo.getQuestion());
 			pstmt.setString(3, pojo.getAnswer());
 
@@ -122,7 +122,7 @@ public class FaqDAO implements CoreDao<FaqVO, Integer> {
 
 			while (rs.next()) {
 				vo = new FaqVO();
-				vo.setId(rs.getInt(1));
+				vo.setId(rs.getString(1));
 				vo.setQuestion(rs.getString(2));
 				vo.setAnswer(rs.getString(3));
 			}
@@ -151,7 +151,7 @@ public class FaqDAO implements CoreDao<FaqVO, Integer> {
 
 			while (rs.next()) {
 				vo = new FaqVO();
-				vo.setId(rs.getInt(1));
+				vo.setId(rs.getString(1));
 				vo.setQuestion(rs.getString(2));
 				vo.setAnswer(rs.getString(3));
 

@@ -3,24 +3,24 @@ package faq.model;
 import java.io.Serializable;
 
 public class FaqVO implements Serializable {
-	private Integer id;
+	private String id;
 	private String question;
 	private String answer;
 
 	public FaqVO() {
 	}
 
-	public FaqVO(Integer id, String question, String answer) {
+	public FaqVO(String id, String question, String answer) {
 		this.id = id;
 		this.question = question;
 		this.answer = answer;
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

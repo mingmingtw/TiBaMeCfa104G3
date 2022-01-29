@@ -9,7 +9,7 @@ public class FaqService {
 		dao = new FaqDAO();
 	}
 
-	public FaqVO addFaq(Integer id, String question, String answer) {
+	public FaqVO addFaq(String id, String question, String answer) {
 
 		FaqVO faqVO = new FaqVO();
 
@@ -22,7 +22,7 @@ public class FaqService {
 		return faqVO;
 	}
 
-	public FaqVO updateFaq(Integer id, String question, String answer) {
+	public FaqVO updateFaq(String id, String question, String answer) {
 
 		FaqVO faqVO = new FaqVO();
 
