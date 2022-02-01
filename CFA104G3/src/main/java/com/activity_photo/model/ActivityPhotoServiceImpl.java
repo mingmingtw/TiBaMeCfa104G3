@@ -1,13 +1,13 @@
-package activityphoto.model;
+package com.activity_photo.model;
 
-import faq.model.FaqDAO;
-import faq.model.FaqVO;
+import com.faq.model.FaqDAOJDBCImpl;
+import com.faq.model.FaqVO;
 
-public class ActivityPhotoService {
-	private ActivityPhotoDAO dao;
+public class ActivityPhotoServiceImpl {
+	private ActivityPhotoDAOJDBCImpl dao;
 
-	public ActivityPhotoService() {
-		dao = new ActivityPhotoDAO();
+	public ActivityPhotoServiceImpl() {
+		dao = new ActivityPhotoDAOJDBCImpl();
 	}
 
 	public ActivityPhotoVO addActivityPhoto(Integer id, Integer activityId, byte[] photo) {

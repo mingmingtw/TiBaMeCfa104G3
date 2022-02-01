@@ -1,4 +1,4 @@
-package activityphoto.model;
+package com.activity_photo.model;
 
 import java.io.Serializable;
 import java.util.Arrays;

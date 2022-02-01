@@ -1,4 +1,4 @@
-package faq.model;
+package com.faq.model;
 
 import java.io.Serializable;
 

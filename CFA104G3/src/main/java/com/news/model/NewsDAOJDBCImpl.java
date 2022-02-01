@@ -1,4 +1,4 @@
-package news.model;
+package com.news.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,11 +10,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.news.model.NewsVO;
+
 import core.dao.CoreDao;
 import core.util.SQLUtil;
-import news.model.NewsVO;
 
-public class NewsDAO implements CoreDao<NewsVO, Integer> {
+public class NewsDAOJDBCImpl implements CoreDao<NewsVO, Integer> {
 
 	private static final String INSERT_STMT = "INSERT INTO NEWS"
 			+ "(NEWS_ID,NEWS_CONTENT,NEWS_IMG,NEWS_TIME,NEWS_TYPE) " + "VALUES (?, ?, ?, ?, ?)";

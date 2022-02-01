@@ -50,36 +50,11 @@
     </FORM>
   </li>
 
-  <jsp:useBean id="faqSvc" scope="page" class="faq.model.FaqService" />
+  <jsp:useBean id="faqSvc" scope="page" class="com.faq.model.FaqServiceImpl" />
    
-  <li>
-     <FORM METHOD="post" ACTION="faq.do" >
-       <b>選擇問答編號:</b>
-       <select size="1" name="id">
-         <c:forEach var="faqVO" items="${faqSvc.all}" > 
-          <option value="${faqVO.id}">${faqVO.id}
-         </c:forEach>   
-       </select>
-       <input type="hidden" name="action" value="getOne_For_Display">
-       <input type="submit" value="送出">
-    </FORM>
-  </li>
+ 
   
-  <li>
-     <FORM METHOD="post" ACTION="faq.do" >
-       <b>選擇問題:</b>
-       <select size="1" name="question">
-         <c:forEach var="faqVO" items="${faqSvc.all}" > 
-          <option value="${faqVO.question}">${faqVO.question}
-         </c:forEach>   
-       </select>
-       <input type="hidden" name="action" value="getOne_For_Display">
-       <input type="submit" value="送出">
-     </FORM>
-  </li>
-</ul>
-
-
+ 
 <h3>問答管理</h3>
 
 <ul>

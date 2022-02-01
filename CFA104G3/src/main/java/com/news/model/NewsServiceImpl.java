@@ -1,12 +1,12 @@
-package news.model;
+package com.news.model;
 
 import java.sql.Timestamp;
 
-public class NewsService {
-	private NewsDAO dao;
+public class NewsServiceImpl {
+	private NewsDAOJDBCImpl dao;
 
-	public NewsService() {
-		dao = new NewsDAO();
+	public NewsServiceImpl() {
+		dao = new NewsDAOJDBCImpl();
 	}
 
 	public NewsVO addNews(Integer id, String content, byte[] image, Timestamp date, Integer type) {

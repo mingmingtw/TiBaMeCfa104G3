@@ -1,12 +1,14 @@
-package faq.model;
+package com.faq.model;
 
 import java.util.List;
 
-public class FaqService {
-	private FaqDAO dao;
+import com.faq.model.FaqVO;
 
-	public FaqService() {
-		dao = new FaqDAO();
+public class FaqServiceImpl {
+	private FaqDAOJDBCImpl dao;
+
+	public FaqServiceImpl() {
+		dao = new FaqDAOJDBCImpl();
 	}
 
 	public FaqVO addFaq(String id, String question, String answer) {
@@ -40,5 +42,8 @@ public class FaqService {
 
 	public FaqVO getOneFaq(Integer id) {
 		return dao.selectById(id);
+	}
+	public List<FaqVO> selectAll(){
+		return dao.selectAll();
 	}
 }

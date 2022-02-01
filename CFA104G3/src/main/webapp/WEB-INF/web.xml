@@ -21,6 +21,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>FaqServlet</servlet-name>
-    <url-pattern>/faq/emp.do</url-pattern>
+    <url-pattern>/faq/faq.do</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -6,7 +6,7 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-import faq.model.*;
+import com.faq.model.*;
 
 public class FaqServlet extends HttpServlet {
 
@@ -53,7 +53,7 @@ public class FaqServlet extends HttpServlet {
 				}
 
 				/*************************** 2.開始查詢資料 *****************************************/
-				FaqService faqSvc = new FaqService();
+				FaqServiceImpl faqSvc = new FaqServiceImpl();
 				FaqVO faqVO = faqSvc.getOneFaq(id);
 				if (faqVO == null) {
 					errorMsgs.add("查無資料");
@@ -91,7 +91,7 @@ public class FaqServlet extends HttpServlet {
 				Integer id = new Integer(req.getParameter("id"));
 
 				/*************************** 2.開始查詢資料 ****************************************/
-				FaqService faqSvc = new FaqService();
+				FaqServiceImpl faqSvc = new FaqServiceImpl();
 				FaqVO faqVO = faqSvc.getOneFaq(id);
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
@@ -147,7 +147,7 @@ public class FaqServlet extends HttpServlet {
 //				}
 
 				/*************************** 2.開始修改資料 *****************************************/
-				FaqService faqSvc = new FaqService();
+				FaqServiceImpl faqSvc = new FaqServiceImpl();
 				FaqVO faqVO = faqSvc.updateFaq(id, question, answer);
 //				faqVO = faqSvc.updateFaq(id, question, answer);
 
@@ -209,7 +209,7 @@ public class FaqServlet extends HttpServlet {
 				}
 
 				/*************************** 2.開始新增資料 ***************************************/
-				FaqService faqSvc = new FaqService();
+				FaqServiceImpl faqSvc = new FaqServiceImpl();
 				faqVO = faqSvc.addFaq(id, question, answer);
 
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
@@ -237,7 +237,7 @@ public class FaqServlet extends HttpServlet {
 				Integer id = new Integer(req.getParameter("id"));
 
 				/*************************** 2.開始刪除資料 ***************************************/
-				FaqService faqSvc = new FaqService();
+				FaqServiceImpl faqSvc = new FaqServiceImpl();
 				faqSvc.deleteById(id);
 
 				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/

@@ -1,4 +1,4 @@
-package activityphoto.model;
+package com.activity_photo.model;
 
 
 
@@ -18,12 +18,12 @@ import org.junit.jupiter.api.Test;
 
 // 一個方法對應一個test
 public class TestActivityPhotoDAO {
-	private ActivityPhotoDAO dao;
+	private ActivityPhotoDAOJDBCImpl dao;
 	
 	// 建立物件
 	@BeforeEach
 	public void before() {
-		dao = new ActivityPhotoDAO();
+		dao = new ActivityPhotoDAOJDBCImpl();
 	}
 
 	// 清除

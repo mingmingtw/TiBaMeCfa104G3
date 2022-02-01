@@ -1,4 +1,4 @@
-package news.model;
+package com.news.model;
 
 import java.io.Serializable;
 import java.sql.Date;

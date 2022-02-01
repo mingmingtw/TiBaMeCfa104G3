@@ -1,24 +1,23 @@
-package news.model;
+package com.faq.model;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import news.model.NewsVO;
+import com.faq.model.FaqVO;
 
-public class TestNewsDAO {
-	private NewsDAO dao;
+public class TestFaqDAO {
+	private FaqDAOJDBCImpl dao;
 
 	@BeforeEach
 	public void before() {
-		dao = new NewsDAO();
+		dao = new FaqDAOJDBCImpl();
 	}
 
 	@AfterEach
@@ -28,14 +27,10 @@ public class TestNewsDAO {
 
 	@Test
 	public void testInsert() {
-		NewsVO pojo = new NewsVO();
+		FaqVO pojo = new FaqVO();
 
-		byte[] data = new byte[1];
-		data[0] = 0x05;
-		pojo.setContent("最新消息內容");
-		pojo.setImage(data);
-		pojo.setDate(Timestamp.valueOf("2022-10-12 15:00:06"));
-		pojo.setType(1);
+		pojo.setQuestion("如何註冊會員?");
+		pojo.setAnswer("點選畫面右上角頭像進行註冊");
 
 		int row = dao.insert(pojo);
 		assertNotEquals(row, 0);
@@ -49,15 +44,11 @@ public class TestNewsDAO {
 
 	@Test
 	public void testUpdate() {
-		NewsVO pojo = new NewsVO();
+		FaqVO pojo = new FaqVO();
 
-		byte[] data = new byte[1];
-		data[0] = 0x06;
-		pojo.setId(1);
-		pojo.setContent("最新消息內容");
-		pojo.setImage(data);
-		pojo.setDate(Timestamp.valueOf("2022-10-12 15:00:06"));
-		pojo.setType(1);
+		pojo.setId("1");
+		pojo.setQuestion("如何登入會員?");
+		pojo.setAnswer("點選畫面右上角頭像登入");
 
 		int row = dao.update(pojo);
 		assertNotEquals(row, 0);
@@ -65,13 +56,13 @@ public class TestNewsDAO {
 
 	@Test
 	public void testSelectById() {
-		NewsVO vo = dao.selectById(1);
+		FaqVO vo = dao.selectById(1);
 		assertNotNull(vo);
 	}
 
 	@Test
 	public void testSelectAll() {
-		List<NewsVO> vos = dao.selectAll();
-		assertTrue(vos.size() > 1);
+		List<FaqVO> vos = dao.selectAll();
+		assertTrue(vos.size() > 0);
 	}
 }

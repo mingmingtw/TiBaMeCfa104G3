@@ -1,37 +1,22 @@
-package activityphoto.model;
+package com.faq.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import activityphoto.model.ActivityPhotoVO;
-
-import core.dao.CoreDao;
 import core.util.SQLUtil;
 
-
-public class ActivityPhotoDAO implements CoreDao<ActivityPhotoVO, Integer> {
-	private static final String INSERT_STMT = "INSERT INTO ACTIVITY_PHOTO"
-			+ "(ACTP_ID,ACTP_ACT_ID,ACTP_PHOTO) "
-			+ "VALUES (?, ?, ?)";
-	private static final String GET_ALL_STMT = "SELECT "
-			+ "ACTP_ID,ACTP_ACT_ID,ACTP_PHOTO "
-			+ "FROM ACTIVITY_PHOTO order by ACTP_ID";
-	private static final String GET_ONE_STMT = "SELECT "
-			+ "ACTP_ID,ACTP_ACT_ID,ACTP_PHOTO "
-			+ "FROM ACTIVITY_PHOTO where ACTP_ID = ?";
-	private static final String DELETE = "DELETE FROM ACTIVITY_PHOTO where ACTP_ID = ?";
-	private static final String UPDATE = "UPDATE ACTIVITY_PHOTO set "
-			+ "ACTP_ID=?,ACTP_ACT_ID=?,ACTP_PHOTO=? "
-			+ "where ACTP_ID=?";
-
-	// 將class載入動作統一至static內
+public class FaqDAOJDBCImpl implements FaqDAO {
+	private static final String GET_ALL_STMT = "select * from FAQ order by FAQ_ID";
+	private static final String GET_ONE_STMT = "select * from FAQ where FAQ_ID = ?";
+	private static final String INSERT_STMT = "insert into FAQ(FAQ_QUESTION, FAQ_ANSWER) values(?, ?)";
+	private static final String DELETE = "delete from FAQ where FAQ_ID = ?";
+	private static final String UPDATE = "update FAQ set FAQ_QUESTION = ?, FAQ_ANSWER = ? where FAQ_ID = ?";
+	
 	static {
 		try {
 			Class.forName(SQLUtil.DRIVER);
@@ -41,27 +26,22 @@ public class ActivityPhotoDAO implements CoreDao<ActivityPhotoVO, Integer> {
 	}
 
 	@Override
-	public int insert(ActivityPhotoVO pojo) {
+	public int insert(FaqVO pojo) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		int insertedRow;
 
 		try {
-			// SQL參數一律使用SqlUtil處理
 			con = DriverManager.getConnection(SQLUtil.URL, SQLUtil.USER, SQLUtil.PASSWORD);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			// 注意參數擺放是否正確
-			pstmt.setInt(1, pojo.getActivityId());
-			pstmt.setInt(2, pojo.getActivityId());
-			pstmt.setBytes(3, pojo.getPhoto());
-			
+			pstmt.setString(1, pojo.getQuestion());
+			pstmt.setString(2, pojo.getAnswer());
 
 			insertedRow = pstmt.executeUpdate();
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
-			// 使用SQL工具處理
 			SQLUtil.closeResource(con, pstmt, null);
 		}
 
@@ -91,7 +71,7 @@ public class ActivityPhotoDAO implements CoreDao<ActivityPhotoVO, Integer> {
 	}
 
 	@Override
-	public int update(ActivityPhotoVO pojo) {
+	public int update(FaqVO pojo) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		int updateRow;
@@ -100,10 +80,9 @@ public class ActivityPhotoDAO implements CoreDao<ActivityPhotoVO, Integer> {
 			con = DriverManager.getConnection(SQLUtil.URL, SQLUtil.USER, SQLUtil.PASSWORD);
 			pstmt = con.prepareStatement(UPDATE);
 
-			pstmt.setInt(1, pojo.getId());
-			pstmt.setInt(2, pojo.getActivityId());
-			pstmt.setBytes(3, pojo.getPhoto());
-			
+			pstmt.setString(1, pojo.getQuestion());
+			pstmt.setString(2, pojo.getAnswer());
+			pstmt.setString(3, pojo.getId());
 
 			updateRow = pstmt.executeUpdate();
 		} catch (SQLException se) {
@@ -116,8 +95,8 @@ public class ActivityPhotoDAO implements CoreDao<ActivityPhotoVO, Integer> {
 	}
 
 	@Override
-	public ActivityPhotoVO selectById(Integer id) {
-		ActivityPhotoVO vo = null;
+	public FaqVO selectById(Integer id) {
+		FaqVO vo = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -130,13 +109,11 @@ public class ActivityPhotoDAO implements CoreDao<ActivityPhotoVO, Integer> {
 
 			rs = pstmt.executeQuery();
 
-			// 直接寫死欄位index，不要用name
-			while (rs.next()) {
-				vo = new ActivityPhotoVO();
-				vo.setActivityId(rs.getInt(1));
-				vo.setActivityId(rs.getInt(2));
-				vo.setPhoto(rs.getBytes(3));
-				
+			if (rs.next()) {
+				vo = new FaqVO();
+				vo.setId(rs.getString("FAQ_ID"));
+				vo.setQuestion(rs.getString("FAQ_QUESTION"));
+				vo.setAnswer(rs.getString("FAQ_ANSWER"));
 			}
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
@@ -148,9 +125,9 @@ public class ActivityPhotoDAO implements CoreDao<ActivityPhotoVO, Integer> {
 	}
 
 	@Override
-	public List<ActivityPhotoVO> selectAll() {
-		List<ActivityPhotoVO> list = new ArrayList<ActivityPhotoVO>();
-		ActivityPhotoVO vo = null;
+	public List<FaqVO> selectAll() {
+		List<FaqVO> list = new ArrayList<FaqVO>();
+		FaqVO vo = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -162,11 +139,10 @@ public class ActivityPhotoDAO implements CoreDao<ActivityPhotoVO, Integer> {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				vo = new ActivityPhotoVO();
-				vo.setActivityId(rs.getInt(1));
-				vo.setActivityId(rs.getInt(2));
-				vo.setPhoto(rs.getBytes(3));
-				
+				vo = new FaqVO();
+				vo.setId(rs.getString("FAQ_ID"));
+				vo.setQuestion(rs.getString("FAQ_QUESTION"));
+				vo.setAnswer(rs.getString("FAQ_ANSWER"));
 				list.add(vo);
 			}
 		} catch (SQLException se) {
@@ -180,4 +156,3 @@ public class ActivityPhotoDAO implements CoreDao<ActivityPhotoVO, Integer> {
 
 	
 }
-
